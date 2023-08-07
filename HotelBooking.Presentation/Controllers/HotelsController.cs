@@ -31,11 +31,18 @@ public class HotelsController : ControllerBase
     }
 
 
-    [HttpGet("CQRS")]
+    [HttpGet("CQRS", Name = "GetHotelsCQRS")]
     public async Task<IActionResult> GetHotelsCQRS()
     {
         var hotels = await _sender.Send(new GetHotelsQuery(TrackChanges: false));
         return Ok(hotels);
+    }
+
+    [HttpGet("CQRS/{id:guid}", Name = "HotelByIdCQRS")]
+    public async Task<IActionResult> GetHotelCQRS(Guid id)
+    {
+        var hotel = await _sender.Send(new GetHotelQuery(id, TrackChanges: false));
+        return Ok(hotel);
     }
 
     /// <summary>
