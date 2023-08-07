@@ -1,0 +1,977 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HotelBooking.Presentation</name>
+    </assembly>
+    <members>
+        <member name="M:HotelBooking.Presentation.Controllers.Authentication.AuthenticationController.RegisterUser(Shared.DataTransferObjects.AuthenticationDtos.UserForRegistrationDto)">
+            <summary>
+            Registers the user
+            </summary>
+            <param name="user"></param>
+            <returns>Created</returns>
+            <remarks>
+            <strong>In the "roles" array, add one or many roles: </strong><br />
+            • User <br />
+            • Admin <br />
+            • HotelOwner <br />
+            <br />
+            <strong>Requirements for the password:</strong><br />
+            • Digit <br />
+            • Uppercase letter <br />
+            • Lowercase letter <br />
+            • NonAlphanumeric symbol <br />
+            • At least 10 symbols <br />
+            • Email should be unique <br />
+            • Username should be unique <br />
+            </remarks>
+            <response code="201">If the item is created</response>
+            <response code="400">If the item is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.Authentication.AuthenticationController.Authenticate(Shared.DataTransferObjects.AuthenticationDtos.UserForAuthenticationDto)">
+            <summary>
+            Logs in to user account
+            </summary>
+            <param name="user"></param>
+            <returns>TokenDto</returns>
+            <remarks>
+            This method is used for user authentication. <br />
+            If you send user credentials (username and password), you'll get access and refresh tokens. <br />
+            If credentials are incorrect or null, the response status will be 401. <br />
+            </remarks>
+            <response code="200">If the credentials are correct</response>
+            <response code="401">If the credentials are incorrect</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.Authentication.TokenController.Refresh(Shared.DataTransferObjects.AuthenticationDtos.TokenDto)">
+            <summary>
+            Refreshes tokens
+            </summary>
+            <param name="tokenDto"></param>
+            <returns>TokenDto</returns>
+            <remarks>
+            This endpoint is used for token refreshing. <br />
+            If you send access and refresh token via request body, you'll get a new pair of access and refresh tokens. <br />
+            The tokens you sent will become expired an inaccessible. <br />
+            Also, you don't have to send Authorization header to this endpoint. <br />
+            If the refresh token is incorrect or already expired, the response code will be 400. <br />
+            </remarks>
+            <response code="200">Returns item</response>
+            <response code="400">If the token is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.FeedbacksController.GetFeedbacksForHotel(System.Guid,Shared.RequestFeatures.UserParameters.FeedbackParameters)">
+            <summary>
+            Gets the list of feedbacks by hotel
+            </summary>
+            <param name="hotelId"></param>
+            <param name="feedbackParameters"></param>
+            <returns>Feedbacks list</returns>
+            <remarks>
+            If the hotel with hotelId does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="200">Returns list of items</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.FeedbacksController.GetFeedbacksForRoom(System.Guid,Shared.RequestFeatures.UserParameters.FeedbackParameters)">
+            <summary>
+            Gets the list of feedbacks by room
+            </summary>
+            <param name="roomId"></param>
+            <param name="feedbackParameters"></param>
+            <returns>Feedbacks list</returns>
+            <remarks>
+            If the hotel with hotelId does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="200">Returns list of items</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.FeedbacksController.GetFeedbacksForReservation(System.Guid,Shared.RequestFeatures.UserParameters.FeedbackParameters)">
+            <summary>
+            Gets the list of feedbacks by reservation
+            </summary>
+            <param name="reservationId"></param>
+            <param name="feedbackParameters"></param>
+            <returns>Feedbacks list</returns>
+            <remarks>
+            If the resertvation with reservationId does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="200">Returns list of items</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.FeedbacksController.GetFeedback(System.Guid)">
+            <summary>
+            Gets a feedback
+            </summary>
+            <param name="id"></param>
+            <returns>Feedback</returns>
+            <remarks>
+            If the feedback with id or does not exist, the response code will be 404.
+            </remarks>
+            <response code="200">Returns item</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.FeedbacksController.CreateFeedback(Shared.DataTransferObjects.InputDtos.FeedbackForCreationDto)">
+            <summary>
+            Creates a feedback
+            </summary>
+            <param name="feedback"></param>
+            <returns>A newly created feedback</returns>
+            <remarks>
+            You can find a href to the newly created feedback in the Location header. <br />
+            <i>You need to have an User role to perform this action. </i>
+            </remarks>
+            <response code="201">Returns the newly created item</response>
+            <response code="400">If the item is null</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.FeedbacksController.UpdateFeedback(System.Guid,Shared.DataTransferObjects.UpdateDtos.FeedbackForUpdateDto)">
+            <summary>
+            Updates a feedback
+            </summary>
+            <param name="id"></param>
+            <param name="feedback"></param>
+            <returns>Updated feedback</returns>
+            <remarks>
+            If the feedback with id does not exist, the response code will be 404. <br />
+            <i>You need to have an User role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.FeedbacksController.PartiallyUpdateFeedback(System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Shared.DataTransferObjects.UpdateDtos.FeedbackForUpdateDto})">
+            <summary>
+            Partially updates a feedback
+            </summary>
+            <param name="id"></param>
+            <param name="patchDoc"></param>
+            <returns>Updated feedback</returns>
+            <remarks>
+            Sample request:
+            
+                [
+                    {
+                        "op": "add",
+                        "path": "/textPositive",
+                        "value": "sample text"
+                    }
+                ]
+            Don't forget to add "Content-Type": "application/json-patch+json". <br />
+            <i>You need to have an User role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.FeedbacksController.DeleteFeedback(System.Guid)">
+            <summary>
+            Deletes a feedback
+            </summary>
+            <param name="id"></param>
+            <returns>No content</returns>
+            <remarks>
+            <i>You need to have an User or Admin role to perform this action.</i>
+            </remarks>
+            <response code="204">Returns No content</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.FeedbacksController.GetFeedbacksOptions">
+            <summary>
+            Shows available request methods
+            </summary>
+            <returns>No content</returns>
+            <response code="204">Returnes No content</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelPhotosController.GetHotelPhotos(System.Guid,Shared.RequestFeatures.UserParameters.HotelPhotoParameters)">
+            <summary>
+            Gets the list of hotel photos
+            </summary>
+            <param name="hotelId"></param>
+            <param name="hotelPhotoParameters"></param>
+            <returns>HotelPhotos list</returns>
+            <remarks>
+            If the hotel with hotelId does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="200">Returns list of items</response>
+            <response code="400">If query parameters are invalid</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelPhotosController.GetHotelPhotoCollection(System.Guid,System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary>
+            Gets a hotel photo collection
+            </summary>
+            <param name="hotelId"></param>
+            <param name="ids"></param>
+            <returns>HotelPhotos list</returns>
+            <remarks>
+            Please note that required query parameter "ids" should look like 
+            (f934d940-f542-400b-8182-aea42a9b0773, 0c6cc6d4-3f8c-43d2-9591-230cb646aab9) <br />
+            If ids parameter is null, or collection count mismatch comparing to ids, Bad Request will be returned in response. <br />
+            If the hotel with hotelId does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="200">Returns list of items</response>
+            <response code="400">If parameters are invalid</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelPhotosController.GetHotelPhoto(System.Guid,System.Guid)">
+            <summary>
+            Gets a hotel photo
+            </summary>
+            <param name="hotelId"></param>
+            <param name="id"></param>
+            <returns>Hotel</returns>
+            <remarks>
+            If the hotel with hotelId or hotel photo with id does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="200">Returns item</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelPhotosController.CreateHotelPhoto(System.Guid,Shared.DataTransferObjects.InputDtos.HotelPhotoForCreationDto)">
+            <summary>
+            Creates a hotel photo
+            </summary>
+            <param name="hotelId"></param>
+            <param name="hotelPhoto"></param>
+            <returns>A newly created hotel photo</returns>
+            <remarks>
+            You can find a href to the newly created hotel photo in the Location header. <br />
+            If the hotel with hotelId does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="201">Returns the newly created item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelPhotosController.CreateHotelPhotoCollection(System.Guid,System.Collections.Generic.IEnumerable{Shared.DataTransferObjects.InputDtos.HotelPhotoForCreationDto})">
+            <summary>
+            Creates a hotel photo collection
+            </summary>
+            <param name="hotelId"></param>
+            <param name="hotelPhotoCollection"></param>
+            <returns>A newly created hotel photo collection</returns>
+            <remarks>
+            You can find a href to the newly created hotel photo collection in the Location header. <br />
+            If ids parameter is null, or collection count mismatch comparing to ids, Bad Request will be returned in response. <br />
+            If the hotel with hotelId does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="200">Returns the newly created list of items</response>
+            <response code="400">If the collection or ids are null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelPhotosController.UpdateHotelPhoto(System.Guid,System.Guid,Shared.DataTransferObjects.UpdateDtos.HotelPhotoForUpdateDto)">
+            <summary>
+            Updates a hotel photo
+            </summary>
+            <param name="hotelId"></param>
+            <param name="id"></param>
+            <param name="hotelPhoto"></param>
+            <returns>Updated hotel photo</returns>
+            <remarks>
+            If the hotel with hotelId or hotel photo with id does not exist, the response code will be 404. <br />
+            <i>You need to have an Admin or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelPhotosController.PartiallyUpdateHotelPhoto(System.Guid,System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Shared.DataTransferObjects.UpdateDtos.HotelPhotoForUpdateDto})">
+            <summary>
+            Partially updates a hotel photo
+            </summary>
+            <param name="hotelId"></param>
+            <param name="id"></param>
+            <param name="patchDoc"></param>
+            <returns>Updated hotel photo</returns>
+            <remarks>
+            Sample request:
+            
+                [
+                    {
+                        "op": "add",
+                        "path": "/path",
+                        "value": "../../../Content/Images/Hotels/new-hotel-photo.jpeg"
+                    }
+                ]
+            Don't forget to add "Content-Type": "application/json-patch+json". <br />
+            <i>You need to have an Admin or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelPhotosController.DeleteHotelPhoto(System.Guid,System.Guid)">
+            <summary>
+            Deletes a hotel photo
+            </summary>
+            <param name="hotelId"></param>
+            <param name="id"></param>
+            <returns>No content</returns>
+            <remarks>
+            </remarks>
+            <response code="204">Returns No content</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelPhotosController.GetHotelPhotosOptions">
+            <summary>
+            Shows available request methods
+            </summary>
+            <returns>No content</returns>
+            <response code="204">Returnes No content</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelsController.GetHotels(Shared.RequestFeatures.UserParameters.HotelParameters)">
+            <summary>
+            Gets the list of all hotels
+            </summary>
+            <param name="hotelParameters"></param>
+            <returns>Hotels list</returns>
+            <remarks>
+            Query parameter MaxStars should be greater than or equal 
+            to MinStars, otherwise response code will by 400. <br />
+            </remarks>
+            <response code="200">Returns list of items</response>
+            <response code="400">If query parameters are invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelsController.GetHotelCollection(System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary>
+            Gets a hotel collection
+            </summary>
+            <param name="ids"></param>
+            <returns>Hotels list</returns>
+            <remarks>
+            Please note that required query parameter "ids" should look like 
+            (f934d940-f542-400b-8182-aea42a9b0773, 0c6cc6d4-3f8c-43d2-9591-230cb646aab9) <br />
+            If ids parameter is null, or collection count mismatch comparing to ids, Bad Request will be returned in response. <br />
+            </remarks>
+            <response code="200">Returns list of items</response>
+            <response code="400">If parameters are invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelsController.GetHotel(System.Guid)">
+            <summary>
+            Gets a hotel
+            </summary>
+            <param name="id"></param>
+            <returns>Hotel</returns>
+            <response code="200">Returns item</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelsController.CreateHotel(Shared.DataTransferObjects.InputDtos.HotelForCreationDto)">
+            <summary>
+            Creates a hotel
+            </summary>
+            <param name="hotel"></param>
+            <returns>A newly created hotel</returns>
+            <remarks>
+            You can create rooms for a newly created hotel in one request by adding "rooms" array to the request body. <br />
+            However, only the newly created hotel will be returned in response. <br />
+            You can also find a href to the newly created hotel in the Location header. <br />
+            <i>You need to have an Admin or HotelOwner role to perform this action. </i>
+            </remarks>
+            <response code="201">Returns the newly created item</response>
+            <response code="400">If the item is null</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelsController.CreateHotelCollection(System.Collections.Generic.IEnumerable{Shared.DataTransferObjects.InputDtos.HotelForCreationDto})">
+            <summary>
+            Creates a hotel collection
+            </summary>
+            <param name="hotelCollection"></param>
+            <returns>A newly created hotel collection</returns>
+            <remarks>
+            You can find a href to the newly created hotel collection in the Location header. <br />
+            If ids parameter is null, or collection count mismatch comparing to ids, Bad Request will be returned in response. <br />
+            <i>You need to have an Admin or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the newly created list of items</response>
+            <response code="400">If the collection or ids are null</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelsController.UpdateHotel(System.Guid,Shared.DataTransferObjects.UpdateDtos.HotelForUpdateDto)">
+            <summary>
+            Updates a hotel
+            </summary>
+            <param name="id"></param>
+            <param name="hotel"></param>
+            <returns>Updated hotel</returns>
+            <remarks>
+            <i>You need to have an Admin or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelsController.PartiallyUpdateHotel(System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Shared.DataTransferObjects.UpdateDtos.HotelForUpdateDto})">
+            <summary>
+            Partially updates a hotel
+            </summary>
+            <param name="id"></param>
+            <param name="patchDoc"></param>
+            <returns>Updated hotel</returns>
+            <remarks>
+            Sample request:
+            
+                [
+                    {
+                        "op": "add",
+                        "path": "/name",
+                        "value": "New name"
+                    }
+                ]
+            Don't forget to add "Content-Type": "application/json-patch+json". <br />
+            <i>You need to have an Admin or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelsController.DeleteHotel(System.Guid)">
+            <summary>
+            Deletes a hotel
+            </summary>
+            <param name="id"></param>
+            <returns>No content</returns>
+            <remarks>
+            <i>You need to have an Admin or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="204">Returns No content</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.HotelsController.GetHotelsOptions">
+            <summary>
+            Shows available request methods
+            </summary>
+            <returns>No content</returns>
+            <response code="204">Returnes No content</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.ReservationsController.GetReservations(System.Guid,Shared.RequestFeatures.UserParameters.ReservationlParameters)">
+            <summary>
+            Gets the list of reservations
+            </summary>
+            <param name="roomId"></param>
+            <param name="reservationParameters"></param>
+            <returns>Reservations list</returns>
+            <remarks>
+            Query parameters MaxDateEntry and MaxDateExit should be greater than or equal to 
+            MinDateEntry and MinDateExit accordingly, otherwise response code will by 400. <br />
+            If the room with roomId does not exist, the response code will be 404. <br /> <br />
+            </remarks>
+            <response code="200">Returns list of items</response>
+            <response code="400">If query parameters are invalid</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.ReservationsController.GetReservation(System.Guid,System.Guid)">
+            <summary>
+            Gets a reservation
+            </summary>
+            <param name="roomId"></param>
+            <param name="id"></param>
+            <returns>Reservation</returns>
+            <remarks>
+            If the room with roomId or reservation with id does not exist, the response code will be 404.
+            </remarks>
+            <response code="200">Returns item</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.ReservationsController.CreateReservation(System.Guid,Shared.DataTransferObjects.InputDtos.ReservationForCreationDto)">
+            <summary>
+            Creates a reservation
+            </summary>
+            <param name="roomId"></param>
+            <param name="reservation"></param>
+            <returns>A newly created reservation</returns>
+            <remarks>
+            You can find a href to the newly created reservation in the Location header. <br />
+            If the room with roomId does not exist, the response code will be 404. <br />
+            <i>You need to have an User role to perform this action. </i>
+            </remarks>
+            <response code="201">Returns the newly created item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.ReservationsController.UpdateReservation(System.Guid,System.Guid,Shared.DataTransferObjects.UpdateDtos.ReservationForUpdateDto)">
+            <summary>
+            Updates a reservation
+            </summary>
+            <param name="roomId"></param>
+            <param name="id"></param>
+            <param name="reservation"></param>
+            <returns>Updated reservation</returns>
+            <remarks>
+            If the room with roomId or reservation with id does not exist, the response code will be 404. <br />
+            <i>You need to have an User or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.ReservationsController.PartiallyUpdateReservation(System.Guid,System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Shared.DataTransferObjects.UpdateDtos.ReservationForUpdateDto})">
+            <summary>
+            Partially updates a reservation
+            </summary>
+            <param name="roomId"></param>
+            <param name="id"></param>
+            <param name="patchDoc"></param>
+            <returns>Updated reservation</returns>
+            <remarks>
+            Sample request:
+            
+                [
+                    {
+                        "op": "add",
+                        "path": "/dateEntry",
+                        "value": "2023-08-21T00:00:00"
+                    }
+                ]
+            Don't forget to add "Content-Type": "application/json-patch+json". <br />
+            <i>You need to have an User or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.ReservationsController.DeleteReservationForRoom(System.Guid,System.Guid)">
+            <summary>
+            Deletes a reservation
+            </summary>
+            <param name="roomId"></param>
+            <param name="id"></param>
+            <returns>No content</returns>
+            <remarks>
+            <i>You need to have an User or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="204">Returns No content</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.ReservationsController.GetReservationsOptions">
+            <summary>
+            Shows available request methods
+            </summary>
+            <returns>No content</returns>
+            <response code="204">Returnes No content</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomPhotosController.GetRoomPhotos(System.Guid,Shared.RequestFeatures.UserParameters.RoomPhotoParameters)">
+            <summary>
+            Gets the list of room photos
+            </summary>
+            <param name="roomId"></param>
+            <param name="roomPhotoParameters"></param>
+            <returns>RoomPhotos list</returns>
+            <remarks>
+            If the room with roomId does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="200">Returns list of items</response>
+            <response code="400">If query parameters are invalid</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomPhotosController.GetRoomPhotoCollection(System.Guid,System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary>
+            Gets a room photo collection
+            </summary>
+            <param name="roomId"></param>
+            <param name="ids"></param>
+            <returns>RoomPhotos list</returns>
+            <remarks>
+            Please note that required query parameter "ids" should look like 
+            (f934d940-f542-400b-8182-aea42a9b0773, 0c6cc6d4-3f8c-43d2-9591-230cb646aab9) <br />
+            If ids parameter is null, or collection count mismatch comparing to ids, Bad Request will be returned in response. <br />
+            If the room with roomId does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="200">Returns list of items</response>
+            <response code="400">If parameters are invalid</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomPhotosController.GetRoomPhoto(System.Guid,System.Guid)">
+            <summary>
+            Gets a room photo
+            </summary>
+            <param name="roomId"></param>
+            <param name="id"></param>
+            <returns>Room</returns>
+            <remarks>
+            If the room with roomId or room photo with id does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="200">Returns item</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomPhotosController.CreateRoomPhoto(System.Guid,Shared.DataTransferObjects.InputDtos.RoomPhotoForCreationDto)">
+            <summary>
+            Creates a room photo
+            </summary>
+            <param name="roomId"></param>
+            <param name="roomPhoto"></param>
+            <returns>A newly created room photo</returns>
+            <remarks>
+            You can find a href to the newly created room photo in the Location header. <br />
+            If the room with roomId does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="201">Returns the newly created item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomPhotosController.CreateRoomPhotoCollection(System.Guid,System.Collections.Generic.IEnumerable{Shared.DataTransferObjects.InputDtos.RoomPhotoForCreationDto})">
+            <summary>
+            Creates a room photo collection
+            </summary>
+            <param name="roomId"></param>
+            <param name="roomPhotoCollection"></param>
+            <returns>A newly created room photo collection</returns>
+            <remarks>
+            You can find a href to the newly created room photo collection in the Location header. <br />
+            If ids parameter is null, or collection count mismatch comparing to ids, Bad Request will be returned in response. <br />
+            If the room with roomId does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="200">Returns the newly created list of items</response>
+            <response code="400">If the collection or ids are null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomPhotosController.UpdateRoomPhoto(System.Guid,System.Guid,Shared.DataTransferObjects.UpdateDtos.RoomPhotoForUpdateDto)">
+            <summary>
+            Updates a room photo
+            </summary>
+            <param name="roomId"></param>
+            <param name="id"></param>
+            <param name="roomPhoto"></param>
+            <returns>Updated room photo</returns>
+            <remarks>
+            If the room with roomId or room photo with id does not exist, the response code will be 404. <br />
+            <i>You need to have an Admin or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomPhotosController.PartiallyUpdateRoomPhoto(System.Guid,System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Shared.DataTransferObjects.UpdateDtos.RoomPhotoForUpdateDto})">
+            <summary>
+            Partially updates a room photo
+            </summary>
+            <param name="roomId"></param>
+            <param name="id"></param>
+            <param name="patchDoc"></param>
+            <returns>Updated room photo</returns>
+            <remarks>
+            Sample request:
+            
+                [
+                    {
+                        "op": "add",
+                        "path": "/path",
+                        "value": "../../../Content/Images/Rooms/new-room-photo.jpeg"
+                    }
+                ]
+            Don't forget to add "Content-Type": "application/json-patch+json". <br />
+            <i>You need to have an Admin or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomPhotosController.DeleteRoomPhoto(System.Guid,System.Guid)">
+            <summary>
+            Deletes a room photo
+            </summary>
+            <param name="roomId"></param>
+            <param name="id"></param>
+            <returns>No content</returns>
+            <remarks>
+            </remarks>
+            <response code="204">Returns No content</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomPhotosController.GetRoomPhotosOptions">
+            <summary>
+            Shows available request methods
+            </summary>
+            <returns>No content</returns>
+            <response code="204">Returnes No content</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomsController.GetRoomsForHotel(System.Guid,Shared.RequestFeatures.UserParameters.RoomParameters)">
+            <summary>
+            Gets the list of rooms
+            </summary>
+            <param name="hotelId"></param>
+            <param name="roomParameters"></param>
+            <returns>Rooms list</returns>
+            <remarks>
+            Query parameters MaxSleepingPlaces and MaxPrice should be greater than or equal to 
+            MinSleepingPlaces and MinPrice accordingly, otherwise response code will by 400. <br />
+            If the hotel with hotelId does not exist, the response code will be 404. <br /> <br />
+            <strong>Data Shaping support:</strong> <br />
+            Enumerate the desirable comma-separated fields in the query parameter "fields" (e.g. fields=id,name,price). <br />
+            <br />
+            <strong>HATEOAS support:</strong> <br />
+            Add one of the options to the "Accept" header: <br />
+            (<b>WARN:</b> You can't add Accept header for this action in Swagger because it doesn't have request body) <br />
+            • JSON: "application/vnd.hotelbooking.hateoas+json" <br />
+            • XML: "application/vnd.hotelbooking.hateoas+xml" <br />
+            </remarks>
+            <response code="200">Returns list of items</response>
+            <response code="400">If query parameters are invalid</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomsController.GetRoomCollection(System.Guid,System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary>
+            Gets a room collection
+            </summary>
+            <param name="hotelId"></param>
+            <param name="ids"></param>
+            <returns>Rooms list</returns>
+            <remarks>
+            Please note that required query parameter "ids" should look like 
+            (f934d940-f542-400b-8182-aea42a9b0773, 0c6cc6d4-3f8c-43d2-9591-230cb646aab9) <br />
+            If ids parameter is null, or collection count mismatch comparing to ids, Bad Request will be returned in response. <br />
+            If the hotel with hotelId or room with id does not exist, the response code will be 404. <br />
+            </remarks>
+            <response code="200">Returns list of items</response>
+            <response code="400">If parameters are invalid</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomsController.GetRoomForHotel(System.Guid,System.Guid)">
+            <summary>
+            Gets a room
+            </summary>
+            <param name="hotelId"></param>
+            <param name="id"></param>
+            <returns>Room</returns>
+            <remarks>
+            If the hotel with hotelId or room with id does not exist, the response code will be 404.
+            </remarks>
+            <response code="200">Returns item</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomsController.CreateRoom(System.Guid,Shared.DataTransferObjects.InputDtos.RoomForCreationDto)">
+            <summary>
+            Creates a room
+            </summary>
+            <param name="hotelId"></param>
+            <param name="room"></param>
+            <returns>A newly created room</returns>
+            <remarks>
+            You can find a href to the newly created room in the Location header. <br />
+            If the hotel with hotelId does not exist, the response code will be 404. <br />
+            <i>You need to have an Admin or HotelOwner role to perform this action. </i>
+            </remarks>
+            <response code="201">Returns the newly created item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomsController.CreateRoomCollection(System.Guid,System.Collections.Generic.IEnumerable{Shared.DataTransferObjects.InputDtos.RoomForCreationDto})">
+            <summary>
+            Creates a room collection
+            </summary>
+            <param name="hotelId"></param>
+            <param name="roomCollection"></param>
+            <returns>A newly created room collection</returns>
+            <remarks>
+            You can find a href to the newly created room collection in the Location header. <br />
+            If ids parameter is null, or collection count mismatch comparing to ids, Bad Request will be returned in response. <br />
+            If the hotel with hotelId does not exist, the response code will be 404. <br />
+            <i>You need to have an Admin or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the newly created list of items</response>
+            <response code="400">If the collection or ids are null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomsController.UpdateRoomForHotel(System.Guid,System.Guid,Shared.DataTransferObjects.UpdateDtos.RoomForUpdateDto)">
+            <summary>
+            Updates a room
+            </summary>
+            <param name="hotelId"></param>
+            <param name="id"></param>
+            <param name="room"></param>
+            <returns>Updated room</returns>
+            <remarks>
+            If the hotel with hotelId or room with id does not exist, the response code will be 404. <br />
+            <i>You need to have an Admin or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomsController.PartiallyUpdateRoomForHotel(System.Guid,System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Shared.DataTransferObjects.UpdateDtos.RoomForUpdateDto})">
+            <summary>
+            Partially updates a room
+            </summary>
+            <param name="hotelId"></param>
+            <param name="id"></param>
+            <param name="patchDoc"></param>
+            <returns>Updated room</returns>
+            <remarks>
+            Sample request:
+            
+                [
+                    {
+                        "op": "add",
+                        "path": "/price",
+                        "value": 420
+                    }
+                ]
+            Don't forget to add "Content-Type": "application/json-patch+json". <br />
+            <i>You need to have an Admin or HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomsController.DeleteRoomForHotel(System.Guid,System.Guid)">
+            <summary>
+            Deletes a room
+            </summary>
+            <param name="hotelId"></param>
+            <param name="id"></param>
+            <returns>No content</returns>
+            <remarks>
+            <i>You need to have a HotelOwner role to perform this action.</i>
+            </remarks>
+            <response code="204">Returns No content</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomsController.GetRoomsOptions">
+            <summary>
+            Shows available request methods
+            </summary>
+            <returns>No content</returns>
+            <response code="204">Returnes No content</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomTypesController.GetRoomTypes(Shared.RequestFeatures.UserParameters.RoomTypeParameters)">
+            <summary>
+            Gets the list of all room types
+            </summary>
+            <param name="roomTypeParameters"></param>
+            <returns>RoomTypes list</returns>
+            <response code="200">Returns list of items</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomTypesController.GetRoomType(System.Guid)">
+            <summary>
+            Gets a room type
+            </summary>
+            <param name="id"></param>
+            <returns>RoomType</returns>
+            <response code="200">Returns item</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomTypesController.CreateRoomType(Shared.DataTransferObjects.InputDtos.RoomTypeForCreationDto)">
+            <summary>
+            Creates a room type
+            </summary>
+            <param name="roomType"></param>
+            <returns>A newly created RoomType</returns>
+            <remarks>
+            You can find a href to the newly created room type in the Location header. <br />
+            <i>You need to have an Admin role to perform this action. </i>
+            </remarks>
+            <response code="201">Returns the newly created item</response>
+            <response code="400">If the item is null</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomTypesController.UpdateRoomType(System.Guid,Shared.DataTransferObjects.UpdateDtos.RoomTypeForUpdateDto)">
+            <summary>
+            Updates a room type
+            </summary>
+            <param name="id"></param>
+            <param name="roomType"></param>
+            <returns>Updated RoomType</returns>
+            <remarks>
+            <i>You need to have an Admin role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomTypesController.PartiallyUpdateRoomType(System.Guid,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Shared.DataTransferObjects.UpdateDtos.RoomTypeForUpdateDto})">
+            <summary>
+            Partially updates a room type
+            </summary>
+            <param name="id"></param>
+            <param name="patchDoc"></param>
+            <returns>Updated roomType</returns>
+            <remarks>
+            Sample request:
+            
+                [
+                    {
+                        "op": "add",
+                        "path": "/name",
+                        "value": "New name"
+                    }
+                ]
+            Don't forget to add "Content-Type": "application/json-patch+json". <br />
+            <i>You need to have an Admin role to perform this action.</i>
+            </remarks>
+            <response code="200">Returns the updated item</response>
+            <response code="400">If the item is null</response>
+            <response code="404">If the item does not exist</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomTypesController.DeleteRoomType(System.Guid)">
+            <summary>
+            Deletes a room type
+            </summary>
+            <param name="id"></param>
+            <returns>No content</returns>
+            <remarks>
+            <i>You need to have an Admin role to perform this action.</i>
+            </remarks>
+            <response code="204">Returns No content</response>
+            <response code="404">If the item does not exist</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RoomTypesController.GetRoomTypesOptions">
+            <summary>
+            Shows available request methods
+            </summary>
+            <returns>No content</returns>
+            <response code="204">Returnes No content</response>
+        </member>
+        <member name="M:HotelBooking.Presentation.Controllers.RootController.GetRoot(System.String)">
+            <summary>
+            Gets API root
+            </summary>
+            <param name="mediaType"></param>
+            <returns>List of links</returns>
+            <remarks>
+            <strong>Important: Don't forget to add one of the options to the "Accept" header: </strong><br />
+            (<b>WARN:</b> You can't add Accept header for this action in Swagger because it doesn't have request body) <br />
+            • JSON: "application/vnd.hotelbooking.apiroot+json" <br />
+            • XML: "application/vnd.hotelbooking.apiroot+xml" <br />
+            <br />
+            This endpoint shows available actions at the API root level (/api/). <br />
+            It returns a list of links, that looks like this:
+            
+            [
+                {
+                    "href": "/api",
+                    "rel": "self",
+                    "method": "GET"
+                },
+                {
+                    "href": "/api/hotels",
+                    "rel": "hotels",
+                    "method": "GET"
+                },
+                {
+                    "href": "/api/hotels",
+                    "rel": "create_hotel",
+                    "method": "POST"
+                },
+                ...
+            ]
+            </remarks>
+        </member>
+    </members>
+</doc>

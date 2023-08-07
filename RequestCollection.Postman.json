@@ -1,0 +1,3219 @@
+{
+  "info": {
+    "name": "HotelBooking",
+    "_postman_id": "ad626cc9-c54d-469a-9bef-9dbc9a985f56",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "",
+      "item": [
+        {
+          "id": "cb351ea2-e853-4da6-8bb4-d4f40ed3c759",
+          "name": "Register User",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/authentication"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"firstname\": \"John\",\r\n  \"lastname\": \"Doe\",\r\n  \"username\": \"johndoe\",\r\n  \"password\": \"$Tr0NgPa$sW0rD\",\r\n  \"email\": \"johndoe@example.org\",\r\n  \"phonenumber\": \"+375291234567\",\r\n  \"roles\": [\r\n    \"user\"\r\n  ]\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "cf89f5ce-cb85-416a-8de1-976064d5c7e0"
+            }
+          ]
+        },
+        {
+          "id": "a0adf161-e9a9-4cba-b792-8bfd26af3baa",
+          "name": "Authenticate",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/authentication/login"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"johndoe\",\r\n  \"password\": \"$Tr0NgPa$sW0rD\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "fcec7836-0fa5-43e2-a141-8206cd1652e3"
+            }
+          ]
+        },
+        {
+          "id": "2aff59ab-5ab6-4580-a3ae-f071b1ded396",
+          "name": "Refresh tokens",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/token/refresh"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"accessToken\": \"eyJhbGciOiJBMTI4Q0JDLUhTMjU2IiwidHlwIjoiSldUIn0.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiam9obmRvZTIiLCJleHAiOjE2OTA5MTg4NDUsImlzcyI6IkhvdGVsQm9va2luZ0FQSSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDEifQ.A4XRLUe618-FTeXP9uDdfQGGHjOeUrAPHaH6EwgzmFM\",\r\n  \"refreshToken\": \"TvbYC4L0LIkDtm6fJdMVXsNdZc+HCYAMlJUhsS5OXvo=\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "3971b50e-8794-47d3-81bb-7ac358586ab9"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Feedbacks",
+      "description": "",
+      "item": [
+        {
+          "id": "6fa4980d-deac-4fe5-a49c-0bd89d48ba35",
+          "name": "Feedbacks by Hotel Id",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/feedbacks"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "3cae2f5c-f618-446b-a019-4315644de0cf"
+            }
+          ]
+        },
+        {
+          "id": "c370a40b-d8eb-4e3e-9eb7-e2cd475accbe",
+          "name": "Feedbacks by Room Id",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/f8fb0b5c-d693-4e8c-934f-2ad79dba1bdc/feedbacks"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "ea00b26b-21d3-4e7e-85dd-4a33166cd227"
+            }
+          ]
+        },
+        {
+          "id": "eaa92ffc-f733-40d9-8a5e-979a0e413650",
+          "name": "Feedbacks by Reservation Id",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/reservations/6a5d35dc-682e-4d02-9e6b-a70550ef9061/feedbacks"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "7634f34c-bb91-49a8-9b49-e2eaa634aa7c"
+            }
+          ]
+        },
+        {
+          "id": "0b0b6938-4cdf-4429-8736-e06089ad8c59",
+          "name": "Feedback by Id",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/feedbacks/3066d405-7fc8-493d-b1ba-08db86517e61"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "f1b46ea9-bcf5-4496-9628-e02ac0afff97"
+            }
+          ]
+        },
+        {
+          "id": "539c4469-4eb7-482c-bc76-32e931c03163",
+          "name": "Create Feedback",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/feedbacks"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"textPositive\": \"222\",\r\n  \"textNegative\": \"New negative text hotelq\",\r\n  \"reservationId\": \"6a5d35dc-682e-4d02-9e6b-a70550ef9061\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "f035a746-4c7c-4bf3-afc5-df4707005622"
+            }
+          ]
+        },
+        {
+          "id": "4c0200ad-d1dd-4a4c-8884-a4c4e8fce1d1",
+          "name": "Update Feedback",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/feedbacks/3066d405-7fc8-493d-b1ba-08db86517e61"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"textPositive\": \"I really liked breakfast in this hotel\",\r\n  \"textNegative\": \"The bathroom is a complete mess\",\r\n  \"reservationId\": \"6a5d35dc-682e-4d02-9e6b-a70550ef9061\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "740e6f15-1317-4aa2-b2f2-c53f405f20fe"
+            }
+          ]
+        },
+        {
+          "id": "f61ce22a-7421-4153-b803-7e0cfc7bdf1b",
+          "name": "Partially Update Feedback",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/feedbacks/3066d405-7fc8-493d-b1ba-08db86517e61"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"op\": \"add\",\r\n    \"path\": \"/textPositive\",\r\n    \"value\": \"Edit: This hotel is a perfect place, 10/10\"\r\n  }\r\n]",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "9a38b117-67d6-4221-aea7-0785e3fd3c13"
+            }
+          ]
+        },
+        {
+          "id": "de45bddd-5834-4a06-99e4-9ed9eb0b5e7a",
+          "name": "Delete Feedback",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/feedbacks/4caeb9c2-8dcb-47c9-546b-08db8651ac67"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "b9d2baf3-791b-431c-9f38-c28ef3aa6153"
+            }
+          ]
+        },
+        {
+          "id": "3b88f620-4c20-42c1-9015-2c8f685eebea",
+          "name": "Feedback Options",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/feedbacks"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "1b9e8b35-ae88-48d3-93b2-cf86a16bfd75"
+            }
+          ]
+        },
+        {
+          "id": "f306edc4-c127-4e72-bffc-2012fe5f9203",
+          "name": "Feedback By Hotel Id Head",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/feedbacks"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "a297647a-5120-4368-9ed1-f48d0fb49053"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Hotel",
+      "description": "",
+      "item": [
+        {
+          "id": "cc1e8798-e20c-48bb-9ce6-00ca71bb1127",
+          "name": "All hotels",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels"
+              ],
+              "port": "5001",
+              "query": [
+                {
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "minStars",
+                  "value": "2",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "maxStars",
+                  "value": "3",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "api-version",
+                "value": "1.0",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "b87e932b-2d7c-4589-99e2-24bb515de17f"
+            }
+          ]
+        },
+        {
+          "id": "ba7f9d40-e301-40b1-8e60-bbb4d12f69db",
+          "name": "Hotel Collection",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/collection/(f934d940-f542-400b-8182-aea42a9b0773,0c6cc6d4-3f8c-43d2-9591-230cb646aab9)"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "3a9c43dc-aabe-4c29-ae66-dceb03dc0fb3"
+            }
+          ]
+        },
+        {
+          "id": "f4e13446-5adf-4d4f-a33b-964bcc549c6a",
+          "name": "Hotel by Id",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/f934d940-f542-400b-8182-aea42a9b0773"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "7ba7029d-f7bd-4305-8d1e-88cc70f294fb"
+            }
+          ]
+        },
+        {
+          "id": "43cf8f2f-8860-4462-b051-0481368178a4",
+          "name": "Create Hotel",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Trip\",\r\n  \"description\": \"Test new hotel\",\r\n  \"stars\": 4,\r\n  \"rooms\": [\r\n    {\r\n      \"price\": 777,\r\n      \"quantity\": 1000,\r\n      \"sleepingPlaces\": 10,\r\n      \"roomTypeId\": \"2d2205b1-2c38-4b92-a710-cf4861e1c6cf\"\r\n    },\r\n    {\r\n      \"price\": 888,\r\n      \"quantity\": 1000,\r\n      \"sleepingPlaces\": 12,\r\n      \"roomTypeId\": \"2d2205b1-2c38-4b92-a710-cf4861e1c6cf\"\r\n    }\r\n  ]\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "85b94197-8635-4933-9652-f07e3cf24d21"
+            }
+          ]
+        },
+        {
+          "id": "decbf30e-41df-425b-a8da-8d3e062d3925",
+          "name": "Create Hotel Collection",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/collection"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"name\": \"New Hotel\",\r\n    \"description\": \"Test new hotel\",\r\n    \"stars\": 999\r\n  },\r\n  {\r\n    \"name\": \"New Hotel 2\",\r\n    \"description\": \"Test new hotel 2\",\r\n    \"stars\": 999\r\n  }\r\n]",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "5dd4b91b-d4b8-4a80-9727-11f89ef58081"
+            }
+          ]
+        },
+        {
+          "id": "fc7f623b-20f9-4017-8acf-b6da0b160ae3",
+          "name": "Update Hotel",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/996b94d6-c9de-44ca-12ee-08db83abe361"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"New Hotel\",\r\n  \"description\": \"This hotel is a great opportunity for your trip\",\r\n  \"stars\": 4\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "0446d3e0-b761-4037-baca-a0b0c3b1896b"
+            }
+          ]
+        },
+        {
+          "id": "87d6a932-c9fe-4d95-96f1-cefd006b5906",
+          "name": "Partially Update Hotel",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/996b94d6-c9de-44ca-12ee-08db83abe361"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"op\": \"replace\",\r\n    \"path\": \"/name\",\r\n    \"value\": \"Tourist Place\"\r\n  }\r\n]",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "002975d3-70f0-4736-a37a-957ed74c4160"
+            }
+          ]
+        },
+        {
+          "id": "f6370fb7-eb69-47b8-8ab2-9042253fa360",
+          "name": "Delete Hotel",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/a32cba95-9e3f-4ac0-5c5b-08db83dcd8f5"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "99732fb8-255f-49b0-8b4b-fe277602e923"
+            }
+          ]
+        },
+        {
+          "id": "198c6ecf-dfc1-40b0-932f-745471af42bd",
+          "name": "Hotel Options",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "e71c0a9b-b518-499b-9d33-b86a76633355"
+            }
+          ]
+        },
+        {
+          "id": "d2e76031-f43c-41ae-8962-112834f53678",
+          "name": "Hotel Head",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "c28ed73e-ba73-4b3d-99c6-4065e5cb2f80"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HotelPhotos",
+      "description": "",
+      "item": [
+        {
+          "id": "84ba9c34-2827-4a3b-8aa0-46e4c24d6551",
+          "name": "HotelPhotos",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/photos"
+              ],
+              "port": "5001",
+              "query": [
+                {
+                  "key": "orderBy",
+                  "value": "path",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "cb5d7b4d-d0bc-4842-9aad-8b974a054b60"
+            }
+          ]
+        },
+        {
+          "id": "c5488a80-6b1a-4a71-8831-843a6d94ef82",
+          "name": "HotelPhotos Collection",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/photos/collection/(c348d19a-e17a-4d27-8ff9-f6ab68130e3a,df864455-1cb5-4055-80fe-02aa5a64d643,04c07bdb-7007-44cb-93da-88cbc804eb42)"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "296b9943-c499-415c-893e-e6ca54f60235"
+            }
+          ]
+        },
+        {
+          "id": "902e2aeb-6c10-4970-b9d5-1b80b0788ebc",
+          "name": "HotelPhoto by Id",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/e418aacc-8a7c-4d78-b509-24dd42e823ee/photos/f62ed813-562d-4e4f-95d1-ff385b11f016"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "8b9e0ced-af0f-4502-8a7f-39c61040542b"
+            }
+          ]
+        },
+        {
+          "id": "fdecc84d-29eb-4141-8840-c3e30a508bfc",
+          "name": "Create HotelPhoto",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/photos"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"path\": \"../../../Content/Images/Hotels/new-hotel-photo-5.jpeg\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "315774c9-0bda-4d9a-9134-0f888e00b9c9"
+            }
+          ]
+        },
+        {
+          "id": "0022726c-97e9-4941-a994-2d76c66136fa",
+          "name": "Create HotelPhoto Collection",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/photos/collection"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"path\": \"../../../Content/Images/Hotels/new-hotel-photo-1.jpeg\"\r\n  },\r\n  {\r\n    \"path\": \"../../../Content/Images/Hotels/new-hotel-photo-2.jpeg\"\r\n  },\r\n  {\r\n    \"path\": \"../../../Content/Images/Hotels/new-hotel-photo-3.jpeg\"\r\n  }\r\n]",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "3785b9aa-b912-4eb7-8295-50e4573eaaff"
+            }
+          ]
+        },
+        {
+          "id": "9806fd15-8a62-471b-93f1-00ce033656b2",
+          "name": "Update HotelPhoto",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/photos/f55b9e3b-8ff3-41c8-77a9-08db86e5a77f"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"path\": \"../../../Content/Images/Hotels/new-hotel-photo-1-fixed.jpeg\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "6fcd96b1-4248-42d8-af98-d26c5b278138"
+            }
+          ]
+        },
+        {
+          "id": "c9a59e11-42c1-41d0-b53b-835b1f68840c",
+          "name": "Partially Update HotelPhoto",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/photos/71cf90a7-c023-4f04-77aa-08db86e5a77f"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"op\": \"replace\",\r\n    \"path\": \"/path\",\r\n    \"value\": \"../../../Content/Images/Hotels/new-hotel-photo-2-fixed.jpeg\"\r\n  }\r\n]",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "4bafb240-3ba5-4002-9ad5-4419538f2dc3"
+            }
+          ]
+        },
+        {
+          "id": "2523d605-b3c1-4194-acaa-b86295e8cb48",
+          "name": "Delete HotelPhoto",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/photos/99cd508f-14ea-40a9-c30b-08db864e5bfc"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "bd50f938-8c50-421f-ade7-abdcc732bef9"
+            }
+          ]
+        },
+        {
+          "id": "fbd258cd-ee1f-4f28-b443-f4297a6dc50e",
+          "name": "HotelPhotos Options",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/photos"
+              ],
+              "port": "5001",
+              "query": [
+                {
+                  "key": "orderBy",
+                  "value": "path",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "7452dfbe-5051-42bf-8531-7a362b5bf8b6"
+            }
+          ]
+        },
+        {
+          "id": "9452aa43-04a1-4600-a859-76aaf696df2e",
+          "name": "HotelPhotos Head",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/photos"
+              ],
+              "port": "5001",
+              "query": [
+                {
+                  "key": "orderBy",
+                  "value": "path",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "8243ac9f-207e-4c79-9b50-7ced234fd226"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reservations",
+      "description": "",
+      "item": [
+        {
+          "id": "4ea837ce-18f3-48e0-9240-d07728b7c0db",
+          "name": "Reservations by Room Id",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/f8fb0b5c-d693-4e8c-934f-2ad79dba1bdc/reservations"
+              ],
+              "port": "5001",
+              "query": [
+                {
+                  "key": "orderBy",
+                  "value": "userId",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "0f4c677f-50c5-481e-b3ef-a0caeabf0a68"
+            }
+          ]
+        },
+        {
+          "id": "63300aaf-771a-477f-87ce-e8816cfaf0af",
+          "name": "Reservation by Room Id and Id",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/f8fb0b5c-d693-4e8c-934f-2ad79dba1bdc/reservations/FF8F27EE-AF5D-485F-9074-0598B9E73AC4"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "003ac888-8613-4566-9e53-715faf051da5"
+            }
+          ]
+        },
+        {
+          "id": "8144c971-5d93-4185-aec0-baf3a24dde6b",
+          "name": "Create Reservation",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/f8fb0b5c-d693-4e8c-934f-2ad79dba1bdc/reservations"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"dateEntry\": \"2024-07-17T00:00:00\",\r\n  \"dateExit\": \"2025-07-18T00:00:00\",\r\n  \"userId\": \"1567fa9b-7fc8-4f4f-b4df-896397616bfe\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "0bf06d5b-dd44-4d18-95e9-556fdf18cfe8"
+            }
+          ]
+        },
+        {
+          "id": "e5122a88-5021-4038-a57a-19562c3993df",
+          "name": "Update Reservation",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/f8fb0b5c-d693-4e8c-934f-2ad79dba1bdc/reservations/a3bdef44-9a36-477c-ef68-08db862e423b"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"dateEntry\": \"2023-08-17T00:00:00\",\r\n  \"dateExit\": \"2023-08-18T00:00:00\",\r\n  \"userId\": \"3a08ecca-7fbe-4886-ad58-61998c01c9e0\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "801bfc72-ff30-4b84-894b-fc8596abb6d3"
+            }
+          ]
+        },
+        {
+          "id": "a1d4d928-ecad-468c-9b47-1108a057041b",
+          "name": "Partially Update Reservation",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/f8fb0b5c-d693-4e8c-934f-2ad79dba1bdc/reservations/a3bdef44-9a36-477c-ef68-08db862e423b"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"op\": \"replace\",\r\n    \"path\": \"/dateExit\",\r\n    \"value\": \"2023-08-21T00:00:00\"\r\n  }\r\n]",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "de2edcba-e13d-4b61-9039-0d55de24a617"
+            }
+          ]
+        },
+        {
+          "id": "8c08cc94-019a-4dfa-8146-9f7b0b0847e1",
+          "name": "Delete Reservation",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/f8fb0b5c-d693-4e8c-934f-2ad79dba1bdc/reservations/d99cfbeb-8385-422a-ef78-08db862e423b"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "e1f805da-525d-47b7-aacb-317a05cbf053"
+            }
+          ]
+        },
+        {
+          "id": "e1afb720-e5da-4aca-8527-dd6d9c68f616",
+          "name": "Reservation Options",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/f8fb0b5c-d693-4e8c-934f-2ad79dba1bdc/reservations"
+              ],
+              "port": "5001",
+              "query": [
+                {
+                  "key": "minDateEntry",
+                  "value": "2023-07-17T00%3A00%3A00",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "4c574129-72c1-4b9e-aff8-f16411b781b8"
+            }
+          ]
+        },
+        {
+          "id": "0660af52-766d-457c-8eaa-d4cd34b7fabd",
+          "name": "Reservation Head",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/f8fb0b5c-d693-4e8c-934f-2ad79dba1bdc/reservations"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "819afdc3-27be-4187-b914-403c0fdfa2ca"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RoomPhotos",
+      "description": "",
+      "item": [
+        {
+          "id": "4b9440cb-6c08-4f25-85b0-d619dbf0a550",
+          "name": "RoomPhotos",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/0bab8e32-e14b-4cd6-90ae-cf795fee80d8/photos"
+              ],
+              "port": "5001",
+              "query": [
+                {
+                  "key": "orderBy",
+                  "value": "path",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "de3df0f9-2bfb-448d-9981-6a7a4b1459d0"
+            }
+          ]
+        },
+        {
+          "id": "529805c3-1c9b-4fbc-828a-575c5cb904df",
+          "name": "RoomPhotos Collection",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/0bab8e32-e14b-4cd6-90ae-cf795fee80d8/photos/collection/(8585a06c-1e9c-499d-a700-33bf69bdff3b,3edcb92d-7592-49ec-9c71-022c153a9c3d)"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "128a30cc-4246-498c-b269-0f064b24d748"
+            }
+          ]
+        },
+        {
+          "id": "849733f8-838a-44e2-8961-a716237d229a",
+          "name": "RoomPhoto by Id",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/0bab8e32-e14b-4cd6-90ae-cf795fee80d8/photos/8585a06c-1e9c-499d-a700-33bf69bdff3b"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "7b4368fc-d8a1-40e9-ac64-9b50061a70c9"
+            }
+          ]
+        },
+        {
+          "id": "e69be65a-38a4-410a-b2f3-3d9de31d3287",
+          "name": "Create RoomPhoto",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/0bab8e32-e14b-4cd6-90ae-cf795fee80d8/photos"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"path\": \"../../../Content/Images/Rooms/new-room-photo.jpeg\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "3bec398b-eb55-41ef-afe6-d1795e014160"
+            }
+          ]
+        },
+        {
+          "id": "453d4e6e-1e9c-4450-8328-3d6d942050e3",
+          "name": "Create RoomPhoto Collection",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/0bab8e32-e14b-4cd6-90ae-cf795fee80d8/photos/collection"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"path\": \"../../../Content/Images/Rooms/new-room-photo-1.jpeg\"\r\n  },\r\n  {\r\n    \"path\": \"../../../Content/Images/Rooms/new-room-photo-2.jpeg\"\r\n  },\r\n  {\r\n    \"path\": \"../../../Content/Images/Rooms/new-room-photo-3.jpeg\"\r\n  }\r\n]",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "c91d3975-5dc9-4ebe-8fc2-4f7547fae7e9"
+            }
+          ]
+        },
+        {
+          "id": "b433f81f-165c-4e60-8685-d9d2850aaa5a",
+          "name": "Update RoomPhoto",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/0bab8e32-e14b-4cd6-90ae-cf795fee80d8/photos/51acceab-0402-465e-12bd-08db86e54794"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"path\": \"../../../Content/Images/Rooms/new-room-photo-1-fixed.jpeg\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "63890083-3a47-4882-8b03-d3602d448711"
+            }
+          ]
+        },
+        {
+          "id": "70a4c3a9-e9ac-43b6-aae6-e2c45b4ab20a",
+          "name": "Partially Update RoomPhoto",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/0bab8e32-e14b-4cd6-90ae-cf795fee80d8/photos/6e72c7e6-e126-4cb5-12be-08db86e54794"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"op\": \"replace\",\r\n    \"path\": \"/path\",\r\n    \"value\": \"../../../Content/Images/Rooms/new-room-photo-2-fixed.jpeg\"\r\n  }\r\n]",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "91a764f2-e108-4784-9aa8-175e0bbb5814"
+            }
+          ]
+        },
+        {
+          "id": "141b7e8b-c172-462f-b595-cd0581e809ac",
+          "name": "Delete RoomPhoto",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/0bab8e32-e14b-4cd6-90ae-cf795fee80d8/photos/c68ad463-1463-49de-d9e1-08db864e30ab"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "ecd67f08-2ff8-433c-a222-fbf9995edfd7"
+            }
+          ]
+        },
+        {
+          "id": "76c9bf27-a25d-49f4-9eed-3dc0459af04f",
+          "name": "RoomPhotos Options",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/0bab8e32-e14b-4cd6-90ae-cf795fee80d8/photos"
+              ],
+              "port": "5001",
+              "query": [
+                {
+                  "key": "orderBy",
+                  "value": "path",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "6c66f82c-8048-41a0-9328-10931952e8be"
+            }
+          ]
+        },
+        {
+          "id": "a4b4974b-db4c-4880-b1fa-d1cc54463c00",
+          "name": "RoomPhotos Head",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/rooms/0bab8e32-e14b-4cd6-90ae-cf795fee80d8/photos"
+              ],
+              "port": "5001",
+              "query": [
+                {
+                  "key": "orderBy",
+                  "value": "path",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "22af8875-b76b-4ce5-bbc1-93e5cade5be2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rooms",
+      "description": "",
+      "item": [
+        {
+          "id": "dc3b26d4-2c14-4680-a713-1075353f441d",
+          "name": "Rooms by Hotel Id",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/rooms"
+              ],
+              "port": "5001",
+              "query": [
+                {
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "orderBy",
+                  "value": "price%20desc",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "fields",
+                  "value": "id%2Cprice%2CsleepingPlaces",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "6913cb98-d8cf-4dad-88bd-61b39467fe8c"
+            }
+          ]
+        },
+        {
+          "id": "50fd8c62-e4f5-45cf-b8df-10ac2deb0a4e",
+          "name": "Rooms Collection",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/rooms/collection/(f1960e67-d4c1-4b40-a454-f39fb3a655f2,1e7bbd59-e683-4700-b8f0-d279ba1304bb,59f51f88-0af4-4d98-882f-1ad1eccd8fd5)"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "cf67e197-f839-4751-b062-ed0ce8abd544"
+            }
+          ]
+        },
+        {
+          "id": "3d883153-57db-4e07-b8c5-614c5c13f4ec",
+          "name": "Room by Hotel Id and Id",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/rooms/f1960e67-d4c1-4b40-a454-f39fb3a655f2"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "da8756f3-1f72-40ef-a59c-f741f8d34db9"
+            }
+          ]
+        },
+        {
+          "id": "a4b399f8-abc2-4017-af9a-c75f86fcb7e6",
+          "name": "Create Room",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/rooms"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"price\": 1,\r\n  \"quantity\": 999,\r\n  \"sleepingPlaces\": 10,\r\n  \"roomTypeId\": \"2d2205b1-2c38-4b92-a710-cf4861e1c6cf\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "b907a176-c9f2-4d14-9bf2-e656726a907f"
+            }
+          ]
+        },
+        {
+          "id": "6ff8fa58-8827-46a3-a65e-0043deb178c7",
+          "name": "Create Room Collection",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/rooms/collection"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"price\": 1,\r\n    \"quantity\": 999,\r\n    \"sleepingPlaces\": 1000,\r\n    \"roomTypeId\": \"2d2205b1-2c38-4b92-a710-cf4861e1c6cf\"\r\n  },\r\n  {\r\n    \"price\": 1,\r\n    \"quantity\": 999,\r\n    \"sleepingPlaces\": 3333,\r\n    \"roomTypeId\": \"c7e74df3-94ad-4e25-b3c1-1a053ce1ff55\"\r\n  }\r\n]",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "5f9b918d-d7dc-4fc2-b40a-a9cfb74c0f59"
+            }
+          ]
+        },
+        {
+          "id": "2b50a6c1-0828-46c2-a43c-634de32814db",
+          "name": "Update Room",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/rooms/b3dc574f-6204-4362-dfc4-08db86e09eda"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"price\": 0,\r\n  \"quantity\": 999,\r\n  \"sleepingPlaces\": 10,\r\n  \"roomTypeId\": \"2d2205b1-2c38-4b92-a710-cf4861e1c6cf\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "1cd79f70-687c-48da-b3fd-2fdf02026ae4"
+            }
+          ]
+        },
+        {
+          "id": "aeab22bd-b5f7-43a0-88eb-8334583d075c",
+          "name": "Partially Update Room",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/rooms/b3dc574f-6204-4362-dfc4-08db86e09eda"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"op\": \"add\",\r\n    \"path\": \"/sleepingPlaces\",\r\n    \"value\": 9\r\n  }\r\n]",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "6112935a-a404-4d99-bb76-56c827a03d7c"
+            }
+          ]
+        },
+        {
+          "id": "cb5ee994-7208-46cc-bfae-001bdfb2e9b1",
+          "name": "Delete Room",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/rooms/ff5cf586-8834-490b-1a86-08db9124eefd"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "29f1ae17-59ab-4af0-93ef-2869b8a549e9"
+            }
+          ]
+        },
+        {
+          "id": "89cd82b9-daf1-41e0-ae84-ede1ed7cfa0c",
+          "name": "Rooms Options",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/rooms"
+              ],
+              "port": "5001",
+              "query": [
+                {
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "orderBy",
+                  "value": "quantity%2Cprice%20desc",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "fields",
+                  "value": "id%2Cprice%2CsleepingPlaces",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.hotelbooking.hateoas+json",
+                "description": "",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "3d9b1ad1-c718-4e8b-9c8f-c0b5509b5edc"
+            }
+          ]
+        },
+        {
+          "id": "2f31add9-2dca-488c-a186-2c39276c5052",
+          "name": "Rooms Head",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/hotels/894622e4-9303-4ee8-a25b-dbea1c26eb1a/rooms"
+              ],
+              "port": "5001",
+              "query": [
+                {
+                  "key": "pageSize",
+                  "value": "100",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "orderBy",
+                  "value": "quantity%2Cprice%20desc",
+                  "description": "",
+                  "disabled": false
+                },
+                {
+                  "key": "fields",
+                  "value": "id%2Cprice%2CsleepingPlaces",
+                  "description": "",
+                  "disabled": false
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.hotelbooking.hateoas+json",
+                "description": "",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "32e90156-e0f9-46ec-b927-63e49359485b"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RoomTypes",
+      "description": "",
+      "item": [
+        {
+          "id": "39e5b31f-e65e-4e73-a072-718912f988d3",
+          "name": "All RoomTypes",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/roomTypes"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": {
+                "token": "<<token>>",
+                "scope": ""
+              }
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "dc0419d0-8453-4a78-b99a-53eadcc7affe"
+            }
+          ]
+        },
+        {
+          "id": "510cc7c5-18f0-427c-9dec-3f8b5b503d77",
+          "name": "RoomType by Id",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/roomTypes/e29def2c-1b26-4b49-52cd-08db862b5fff"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "e08240b6-4b4b-444c-832c-7a6da3b9ec79"
+            }
+          ]
+        },
+        {
+          "id": "1d6be5b4-0343-4dac-9d33-ac3b39ef1a67",
+          "name": "Create RoomType",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/roomTypes"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"New RoomType\",\r\n  \"description\": \"Description new\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "527b68fb-b464-4809-882f-119a7cf1d35c"
+            }
+          ]
+        },
+        {
+          "id": "a84a5f02-c5c2-4086-b05a-8acbdf2cd9cf",
+          "name": "Update RoomType",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/roomTypes/e29def2c-1b26-4b49-52cd-08db862b5fff"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Dormitory room\",\r\n  \"description\": \"This is a brand new room type\"\r\n}",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "9d2979ff-c193-41b2-9784-78e3d60cddf3"
+            }
+          ]
+        },
+        {
+          "id": "e20bcbce-34d8-4fe6-adbf-e6d536e05ab8",
+          "name": "Partially Update RoomType",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/roomTypes/e29def2c-1b26-4b49-52cd-08db862b5fff"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "",
+                "disabled": false
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n  {\r\n    \"op\": \"replace\",\r\n    \"path\": \"/description\",\r\n    \"value\": \"Old but gold dorm with cockroaches and loud roommates\"\r\n  }\r\n]",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "84cc93f5-12fd-4993-b424-cb8fcf1eaa3f"
+            }
+          ]
+        },
+        {
+          "id": "8776336c-fbb6-4fc6-8288-afb5a6bdab11",
+          "name": "Delete RoomType",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/roomTypes/5a30a63f-d350-4238-52ca-08db862b5fff"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "f594e2a4-3a66-4195-bc61-efe43007b375"
+            }
+          ]
+        },
+        {
+          "id": "5f646733-8ee2-43cd-8672-a0123ccc1eea",
+          "name": "RoomType Options",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/roomTypes"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "f92cc3e2-8477-491f-aa28-f2f80e21f00c"
+            }
+          ]
+        },
+        {
+          "id": "f4094c87-b312-4af9-a567-c07987194811",
+          "name": "RoomType Head",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "localhost",
+              "path": [
+                "api/roomTypes"
+              ],
+              "port": "5001"
+            },
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "disabled": false
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "header": [],
+              "body": "any",
+              "code": 200,
+              "name": "Response_200",
+              "id": "015dafe3-ce94-401f-8d6d-5bce616dbb67"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "719422c9-566a-425a-acc8-703ec03c89ea",
+      "name": "API Root",
+      "request": {
+        "url": {
+          "protocol": "https",
+          "host": "localhost",
+          "path": [
+            "api"
+          ],
+          "port": "5001"
+        },
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "application/vnd.hotelbooking.apiroot+json",
+            "description": "",
+            "disabled": false
+          },
+          {
+            "key": "Accept",
+            "value": "*/*",
+            "disabled": false
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "disabled": false
+        },
+        "description": ""
+      },
+      "response": [
+        {
+          "header": [],
+          "body": "any",
+          "code": 200,
+          "name": "Response_200",
+          "id": "822c65f7-7a21-4f84-8b09-9e93c8d36dc4"
+        }
+      ]
+    }
+  ],
+  "variable": []
+}
