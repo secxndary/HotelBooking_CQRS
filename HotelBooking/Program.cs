@@ -1,5 +1,8 @@
+using Application.Behaviors;
 using AspNetCoreRateLimit;
 using Contracts;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using HotelBooking.Extensions;
 using HotelBooking.Presentation.Filters.ActionFilters;
 using HotelBooking.Utility;
@@ -45,6 +48,8 @@ builder.Services.AddJwtConfiguration(builder.Configuration);
 builder.Services.ConfigureSwagger();
 builder.Services.AddMediatR(typeof(Application.AssemblyReference).Assembly);
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+builder.Services.AddValidatorsFromAssembly(typeof(Application.AssemblyReference).Assembly);
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {

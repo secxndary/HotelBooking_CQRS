@@ -4,6 +4,9 @@ using Entities.ErrorModel;
 using Entities.Exceptions.NotFound;
 using Entities.Exceptions.BadRequest;
 using Microsoft.AspNetCore.Diagnostics;
+using Entities.Exceptions.CQRS;
+using System.Text.Json;
+
 namespace HotelBooking.Extensions;
 
 public static class ExceptionMiddlewareExtensions
@@ -24,18 +27,27 @@ public static class ExceptionMiddlewareExtensions
                     {
                         NotFoundException => StatusCodes.Status404NotFound,
                         BadRequestException => StatusCodes.Status400BadRequest,
+                        ValidationAppException => StatusCodes.Status422UnprocessableEntity,
                         _ => StatusCodes.Status500InternalServerError
                     };
 
                     logger.LogError($"Something went wrong: {contextFeature.Error}");
 
-                    await context.Response.WriteAsync(
-                        new ErrorDetails()
-                        {
-                            StatusCode = context.Response.StatusCode,
-                            Message = contextFeature.Error.Message
-                        }.ToString()
-                    );
+                    if (contextFeature.Error is ValidationAppException exception)
+                    {
+                        await context.Response
+                        .WriteAsync(JsonSerializer.Serialize(new { exception.Errors }));
+                    }
+                    else
+                    {
+                        await context.Response.WriteAsync(
+                            new ErrorDetails()
+                            {
+                                StatusCode = context.Response.StatusCode,
+                                Message = contextFeature.Error.Message
+                            }.ToString()
+                        );
+                    }
                 }
             });
         });
