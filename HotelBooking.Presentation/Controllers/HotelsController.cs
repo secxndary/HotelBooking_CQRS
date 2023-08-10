@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using Application.Commands;
+using Application.Notifications;
 using Application.Queries;
 using Entities.ErrorModel;
 using HotelBooking.Presentation.Filters.ActionFilters;
@@ -25,11 +26,13 @@ public class HotelsController : ControllerBase
 {
     private readonly IServiceManager _service;
     private readonly ISender _sender;
+    private readonly IPublisher _publisher;
 
-    public HotelsController(IServiceManager service, ISender sender)
+    public HotelsController(IServiceManager service, ISender sender, IPublisher publisher)
     {
         _service = service;
         _sender = sender;
+        _publisher = publisher;
     }
 
 
@@ -64,7 +67,7 @@ public class HotelsController : ControllerBase
     [HttpDelete("CQRS/{id:guid}")]
     public async Task<IActionResult> DeleteHotelCQRS(Guid id)
     {
-        await _sender.Send(new DeleteHotelCommand(id, TrackChanges: false));
+        await _publisher.Publish(new HotelDeletedNotification(id, TrackChanges: false));
         return NoContent();
     }
 

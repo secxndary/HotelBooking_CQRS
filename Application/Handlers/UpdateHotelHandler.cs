@@ -2,10 +2,8 @@
 using AutoMapper;
 using Contracts.Repository;
 using Entities.Exceptions.NotFound;
-using Entities.Models.UserModels;
 using MediatR;
 using Shared.DataTransferObjects.OutputDtos;
-
 namespace Application.Handlers;
 
 public class UpdateHotelHandler : IRequestHandler<UpdateHotelCommand, HotelDto>
