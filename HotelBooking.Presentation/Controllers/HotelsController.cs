@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Application.Commands;
 using Application.Queries;
 using Entities.ErrorModel;
 using HotelBooking.Presentation.Filters.ActionFilters;
@@ -43,6 +44,13 @@ public class HotelsController : ControllerBase
     {
         var hotel = await _sender.Send(new GetHotelQuery(id, TrackChanges: false));
         return Ok(hotel);
+    }
+
+    [HttpPost("CQRS")]
+    public async Task<IActionResult> CreateHotelCQRS([FromBody] HotelForCreationDto hotel)
+    {
+        var createdHotel = await _sender.Send(new CreateHotelCommand(hotel));
+        return CreatedAtRoute("HotelByIdCQRS", new { id = createdHotel.Id }, createdHotel);
     }
 
     /// <summary>
