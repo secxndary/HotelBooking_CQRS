@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Service.Contracts;
 using Shared.DataTransferObjects.InputDtos;
 using Shared.DataTransferObjects.OutputDtos;
@@ -52,6 +53,21 @@ public class HotelsController : ControllerBase
         var createdHotel = await _sender.Send(new CreateHotelCommand(hotel));
         return CreatedAtRoute("HotelByIdCQRS", new { id = createdHotel.Id }, createdHotel);
     }
+
+    [HttpPut("CQRS/{id:guid}")]
+    public async Task<IActionResult> UpdateHotelCQRS(Guid id, [FromBody] HotelForUpdateDto hotel)
+    {
+        var updatedHotel = await _sender.Send(new UpdateHotelCommand(id, hotel, TrackChanges: true));
+        return Ok(updatedHotel);
+    }
+
+    [HttpDelete("CQRS/{id:guid}")]
+    public async Task<IActionResult> DeleteHotelCQRS(Guid id)
+    {
+        await _sender.Send(new DeleteHotelCommand(id, TrackChanges: false));
+        return NoContent();
+    }
+
 
     /// <summary>
     /// Gets the list of all hotels
